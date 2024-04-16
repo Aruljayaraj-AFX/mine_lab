@@ -10,7 +10,7 @@ int main()
     printf("Enter the string ");
     scanf("%[^\n]%*c",&a);
     
-    printf("Enter the string ");a
+    printf("Enter the string ");
     scanf("%[^\n]%*c",&b);
 
     int bp = strlen(a);
