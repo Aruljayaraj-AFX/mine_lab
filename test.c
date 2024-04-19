@@ -1,78 +1,57 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <stdbool.h>
 
-void lost(int b[],int e, int r)
+int visited[100];
+int j=0;
+int v=0;
+
+void bfs(int v, int a, char c[a], int o[a][a]) 
 {
-    int y=7;
-    while(y!=0)
-    { 
-        y=0;
-        for (int i = 0; i < r; i++)
+    for (int i = 0; i < a; ++i)
+    {
+         if ((o[v][i]==1) && (visited[i] != 1)) 
         {
-            int f =(2*i)+1;
-            int l =(2*i)+2;
-
-            if(l<6)
-            {
-                if(b[i]>b[f])
-                {
-                    int temp = b[i];
-                    b[i] = b[f];
-                    b[f] = temp;
-                    y=y+1;
-                }
-                if(b[i]>b[l])
-                {
-                    int temp = b[i];
-                    b[i] = b[l];
-                    b[l] = temp;
-                    y=y+1;
-                }
-            }
+            printf("%c",c[i]);
+            visited[i]=1;
         }
-    } 
+    }
+    if(v!=5)
+    {
+        v++;
+        bfs(v,a, c, o);
+    }
+
 }
 
-int main()
-{
-    int b[] = {12,10,9,5,6,0,1};
-    int e = 7;
-    int r = e/2;
-    int y=7;
-    while(y!=0)
-    { y=0;
-    for (int i = 0; i < r; i++)
-    {
-        int f =(2*i)+1;
-        int l =(2*i)+2;
+int main() {
 
-        if(b[i]>b[f])
-        {
-            int temp = b[i];
-            b[i] = b[f];
-            b[f] = temp;
-            y=y+1;
+    int a;
+    printf("How many nodes are present in the graph or tree: ");
+    scanf("%d", &a);
+    char c[a];
+    for (int i = 0; i < a; i++) {
+        printf("Enter the node %d: ", i + 1);
+        scanf(" %c", &c[i]);  
+    }
+    int o[a][a];
+
+    for (int u = 0; u < a; u++) {
+        for (int uu = 0; uu < a; uu++) {
+            printf("Enter 1 if %c and %c are connected, otherwise 0: ", c[u], c[uu]);
+            scanf("%d", &o[u][uu]);
         }
-        if(b[i]>b[l])
-        {
-            int temp = b[i];
-            b[i] = b[l];
-            b[l] = temp;
-            y=y+1;
-        }
-        
-    }
     }
 
-    if(b[0] == 0)
-    {
-        int u = b[0];
-        b[0] = b[e-1];
-        b[e-1] = u;
-        lost(b,e,r);
-    }
-    for(int o = 0; o < e; o++)
-    {
-        printf("%d\n",b[o]);
-    }
 
+    printf("Breath First Search Path:\n");
+    for (int i = 0; i < a; ++i) {
+        visited[i] = 0;
+    }
+    j++;
+    printf("%c",c[v]);
+    visited[v]=1;
+    bfs(v,a, c, o); 
+
+    printf("\n");
+    return 0;
 }
