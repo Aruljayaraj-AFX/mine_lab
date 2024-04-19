@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int visited[10]; 
+int visited[100]; 
 
 void dfs(int v, int a, char c[a], int o[a][a]) {
     printf("%c ", c[v]);
